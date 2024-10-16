@@ -43,5 +43,7 @@ namespace MMABooksBusinessClasses
         {
             return StateCode + ", " + StateName;
         }
+
+        //public override string ToString() => StateCode + ", " + StateName;
     }
 }
