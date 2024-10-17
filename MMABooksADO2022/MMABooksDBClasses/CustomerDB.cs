@@ -5,6 +5,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Data;
 using MMABooksBusinessClasses;
+using Org.BouncyCastle.Tls;
 
 namespace MMABooksDBClasses
 {
@@ -97,6 +98,8 @@ namespace MMABooksDBClasses
         public static bool DeleteCustomer(Customer customer)
         {
             // get a connection to the database
+            MySqlConnection connection = MMABooksDB.GetConnection();
+
             string deleteStatement =
                 "DELETE FROM Customers " +
                 "WHERE CustomerID = @CustomerID " +
@@ -106,29 +109,41 @@ namespace MMABooksDBClasses
                 "AND State = @State " +
                 "AND ZipCode = @ZipCode";
             // set up the command object
+            MySqlCommand deleteCommand = new MySqlCommand(deleteStatement, connection);
+            deleteCommand.Parameters.AddWithValue("@CustomerID", customer.CustomerID);
+            deleteCommand.Parameters.AddWithValue("@Name", customer.Name);
+            deleteCommand.Parameters.AddWithValue("@Address", customer.Address);
+            deleteCommand.Parameters.AddWithValue("@City", customer.City);
+            deleteCommand.Parameters.AddWithValue("@State", customer.State);
+            deleteCommand.Parameters.AddWithValue("@ZipCode", customer.ZipCode);
 
             try
             {
                 // open the connection
+                connection.Open();
                 // execute the command
+                int count = deleteCommand.ExecuteNonQuery();
                 // if the number of records returned = 1, return true otherwise return false
+                return count == 1;
             }
             catch (MySqlException ex)
             {
                 // throw the exception
+                throw ex;
             }
             finally
             {
                 // close the connection
+                connection.Close();
             }
-
-            return false;
         }
 
         public static bool UpdateCustomer(Customer oldCustomer,
             Customer newCustomer)
         {
             // create a connection
+            MySqlConnection connection = MMABooksDB.GetConnection();
+
             string updateStatement =
                 "UPDATE Customers SET " +
                 "Name = @NewName, " +
@@ -143,22 +158,39 @@ namespace MMABooksDBClasses
                 "AND State = @OldState " +
                 "AND ZipCode = @OldZipCode";
             // setup the command object
+            MySqlCommand updateCommand = new MySqlCommand(updateStatement, connection);
+            // The new customer values for the update.
+            updateCommand.Parameters.AddWithValue("@NewName", newCustomer.Name);
+            updateCommand.Parameters.AddWithValue("@NewAddress", newCustomer.Address);
+            updateCommand.Parameters.AddWithValue("@NewCity", newCustomer.City);
+            updateCommand.Parameters.AddWithValue("@NewState", newCustomer.State);
+            updateCommand.Parameters.AddWithValue("@NewZipCode", newCustomer.ZipCode);
+
+            // The old customer values that will be replaced in this update.
+            updateCommand.Parameters.AddWithValue("@OldCustomerID", oldCustomer.CustomerID);
+            updateCommand.Parameters.AddWithValue("@OldName", oldCustomer.Name);
+            updateCommand.Parameters.AddWithValue("@OldAddress", oldCustomer.Address);
+            updateCommand.Parameters.AddWithValue("@OldCity", oldCustomer.City);
+            updateCommand.Parameters.AddWithValue("@OldState", oldCustomer.State);
+            updateCommand.Parameters.AddWithValue("@OldZipCode", oldCustomer.ZipCode);
+
             try
             {
                 // open the connection
+                connection.Open();
                 // execute the command
+                int count = updateCommand.ExecuteNonQuery();
                 // if the number of records returned = 1, return true otherwise return false
+                return count == 1;
             }
             catch (MySqlException ex)
             {
-                // throw the exception
+                throw ex;
             }
             finally
             {
-                // close the connection
+                connection.Close();
             }
-
-            return false;
         }
     }
 }
