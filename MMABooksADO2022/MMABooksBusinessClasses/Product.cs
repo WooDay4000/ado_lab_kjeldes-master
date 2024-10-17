@@ -10,7 +10,7 @@ namespace MMABooksBusinessClasses
         public Product() { }
 
         // Loaded Constructor
-        public Product(string productcode, string description, double unitprice, int onhandquantity)
+        public Product(string productcode, string description, decimal unitprice, int onhandquantity)
         {
             ProductCode = productcode;
             Description = description;
@@ -21,9 +21,11 @@ namespace MMABooksBusinessClasses
         // instance variables
         private string productcode;
         private string description;
-        private double unitprice;
+        private decimal unitprice;
         private int onhandquantity;
 
+
+        // Getter and setter field of the ProductCode field for Product object
         public string ProductCode
         {
             get
@@ -44,6 +46,7 @@ namespace MMABooksBusinessClasses
             }
         }
 
+        // Getter and setter field of the Description field for Product object
         public string Description
         {
             get
@@ -64,7 +67,8 @@ namespace MMABooksBusinessClasses
             }
         }
 
-        public double UnitPrice
+        // Getter and setter field of the UnitPrice field for Product object
+        public decimal UnitPrice
         {
             get
             {
@@ -84,6 +88,7 @@ namespace MMABooksBusinessClasses
             }
         }
 
+        // Getter and setter field of the OnHandQuantity field for Product object
         public int OnHandQuantity
         {
             get
@@ -105,6 +110,8 @@ namespace MMABooksBusinessClasses
             }
         }
 
+        // A ToString override that allows for the object no matter the datatype to be outputted as a string
+        // for testing and to be displayed.
         public override string ToString() => ProductCode + ", " + Description + ", " + UnitPrice + ", " + OnHandQuantity;
     }
 }

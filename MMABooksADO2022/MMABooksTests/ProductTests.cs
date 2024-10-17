@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MMABooksTests
@@ -17,7 +18,7 @@ namespace MMABooksTests
         public void SetUp()
         {
             def = new Product();
-            p = new Product("RTYU", "Roland's Guide To Coding Or Whatever", 84.75, 5000);
+            p = new Product("RTYU", "Roland's Guide To Coding Or Whatever", 84.75m, 5000);
         }
 
         [Test]
@@ -41,7 +42,32 @@ namespace MMABooksTests
             Assert.AreNotEqual(null, p.OnHandQuantity);
         }
 
+        [Test]
 
+        public void TestProductCodeSetter()
+        {
+            p.ProductCode = "FGHJ";
+            Assert.AreNotEqual("RTYU", p.ProductCode);
+            Assert.AreEqual("FGHJ", p.ProductCode);
+        }
 
+        [Test]
+
+        public void TestSettersNameTooLong()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => p.ProductCode = "WERTY");
+        }
+
+        [Test]
+
+        public void TestProductToString()
+        {
+            p = new Product("ASDF", "Something Something Coding", 25.25m, 200);
+
+            Assert.IsTrue(p.ToString().Contains("ASDF"));
+            Assert.IsTrue(p.ToString().Contains("Something Something Coding"));
+            Assert.IsTrue(p.ToString().Contains("25.25"));
+            Assert.IsTrue(p.ToString().Contains("200"));
+        }
     }
 }

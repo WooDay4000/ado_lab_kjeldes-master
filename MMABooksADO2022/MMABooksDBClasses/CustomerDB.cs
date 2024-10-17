@@ -11,7 +11,8 @@ namespace MMABooksDBClasses
 {
     public static class CustomerDB
     {
-
+        // A method used to grab from the database, using the customerID of a field
+        // to grab a specific customer record.
         public static Customer GetCustomer(int customerID)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
@@ -54,6 +55,8 @@ namespace MMABooksDBClasses
             }
         }
 
+        // A method used to add a customer record to the database's Customers table, using a customer object
+        // to have the data added to the database.
         public static int AddCustomer(Customer customer)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
@@ -95,6 +98,8 @@ namespace MMABooksDBClasses
             }
         }
 
+        // A method used to delate a customer record from the database's Customers table, using the customer object
+        // to delate a specific customer record.
         public static bool DeleteCustomer(Customer customer)
         {
             // get a connection to the database
@@ -138,6 +143,9 @@ namespace MMABooksDBClasses
             }
         }
 
+        // A method used to update a customer record from the database's Customers table, using the customer object
+        // mimicking the customer record you would like to update, and a customer object with the data that you want
+        // the customer record to be updated to.
         public static bool UpdateCustomer(Customer oldCustomer,
             Customer newCustomer)
         {

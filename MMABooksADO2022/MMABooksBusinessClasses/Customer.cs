@@ -8,9 +8,9 @@ namespace MMABooksBusinessClasses
         // you can ignore them
         public Customer() { }
 
-        public Customer(int id, string name, string address, string city, string state, string zipcode)
+        public Customer(int customerID, string name, string address, string city, string state, string zipcode)
         {
-            CustomerID = id;
+            CustomerID = customerID;
             Name = name;
             Address = address;
             City = city;
@@ -26,6 +26,7 @@ namespace MMABooksBusinessClasses
         private string state;
         private string zipcode;
 
+        // Getter and setter field of the CustomerID field for Customer object
         public int CustomerID
         {
             get
@@ -46,6 +47,7 @@ namespace MMABooksBusinessClasses
             }
         }
 
+        // Getter and setter field of the Name field for Customer object
         public string Name
         {
             get
@@ -66,6 +68,7 @@ namespace MMABooksBusinessClasses
             }
         }
 
+        // Getter and setter field of the Address field for Customer object
         public string Address
         {
             get
@@ -86,6 +89,7 @@ namespace MMABooksBusinessClasses
             }
         }
 
+        // Getter and setter field of the City field for Customer object
         public string City
         {
             get
@@ -106,6 +110,7 @@ namespace MMABooksBusinessClasses
             }
         }
 
+        // Getter and setter field of the State field for Customer object
         public string State
         {
             get
@@ -126,6 +131,7 @@ namespace MMABooksBusinessClasses
             }
         }
 
+        // Getter and setter field of the ZipCode field for Customer object
         public string ZipCode
         {
             get
@@ -146,6 +152,8 @@ namespace MMABooksBusinessClasses
             }
         }
 
+        // A ToString override that allows for the object no matter the datatype to be outputted as a string
+        // for testing and to be displayed.
         public override string ToString() => CustomerID + ", " + Name + ", " + Address + ", " + City + ", " + State + ", " + ZipCode;
     }
 }

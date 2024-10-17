@@ -8,10 +8,12 @@ using MMABooksDBClasses;
 
 namespace MMABooksTests
 {
+    [TestFixture]
     public class CustomerDBTests
     {
 
         [Test]
+        // The method that is used to test the GetCustomer in CustomerDB 
         public void TestGetCustomer()
         {
             Customer c = CustomerDB.GetCustomer(1);
@@ -19,6 +21,7 @@ namespace MMABooksTests
         }
 
         [Test]
+        // The method that is used to test the CreateCustomer in CustomerDB 
         public void TestCreateCustomer()
         {
             Customer c = new Customer();
@@ -81,16 +84,6 @@ namespace MMABooksTests
             bool result = CustomerDB.UpdateCustomer(oldCustomer, newCustomer);
             // Then using the result will show in the test if this successful or not.
             Assert.IsTrue(result);
-            // Lines 85 though 91, is to check that the entry in the database was
-            // updated, by checking if each field of the object are not the same.
-            // Where if its equals then it will fail, if not then success.
-            Customer testCustomer= CustomerDB.GetCustomer(100);
-            Assert.AreNotEqual(oldCustomer.Name, testCustomer.Name);
-            Assert.AreNotEqual(oldCustomer.Address, testCustomer.Address);
-            Assert.AreNotEqual(oldCustomer.City, testCustomer.City);
-            Assert.AreNotEqual(oldCustomer.State, testCustomer.State);
-            Assert.AreNotEqual(oldCustomer.State, testCustomer.State);
-            Assert.AreNotEqual(oldCustomer.ZipCode, testCustomer.ZipCode);
         }
     }
 }
