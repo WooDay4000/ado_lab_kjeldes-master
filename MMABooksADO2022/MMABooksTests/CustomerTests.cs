@@ -34,11 +34,11 @@ namespace MMABooksTests
             Assert.AreEqual(null, def.ZipCode);
 
             Assert.IsNotNull(c);
-            Assert.AreNotEqual(null, c.Name);
-            Assert.AreNotEqual(null, c.Address);
-            Assert.AreNotEqual(null, c.City);
-            Assert.AreNotEqual(null, c.State);
-            Assert.AreNotEqual(null, c.ZipCode);
+            Assert.AreEqual("Arcane, Ryan", c.Name);
+            Assert.AreEqual("101 Main Street", c.Address);
+            Assert.AreEqual("Orlando", c.City);
+            Assert.AreEqual("FL", c.State);
+            Assert.AreEqual("71234", c.ZipCode);
         }
 
         [Test]

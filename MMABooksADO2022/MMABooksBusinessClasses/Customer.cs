@@ -18,7 +18,7 @@ namespace MMABooksBusinessClasses
             ZipCode = zipcode;
         }
 
-        // instance variables
+        // instance variables, always camelCase
         private int customerID;
         private string name;
         private string address;
@@ -42,7 +42,7 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Customer must be a positive integer");
+                    throw new ArgumentOutOfRangeException("Customer ID must be a positive integer");
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Must be at least 1 character and no more then 100 characters");
+                    throw new ArgumentOutOfRangeException("Name must be at least 1 character and no more then 100 characters");
                 }
             }
         }
@@ -84,7 +84,7 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Must be at least 1 character and no more then 100 characters");
+                    throw new ArgumentOutOfRangeException("Address must be at least 1 character and no more then 100 characters");
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Must be at least 1 character and no more then 100 characters");
+                    throw new ArgumentOutOfRangeException("City must be at least 1 character and no more then 100 characters");
                 }
             }
         }
@@ -126,7 +126,7 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Must be at least 1 character and no more then 100 characters");
+                    throw new ArgumentOutOfRangeException("State must be at least 1 character and no more then 100 characters");
                 }
             }
         }
@@ -147,7 +147,7 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Must be at least 5 characters and no more then 10 characters");
+                    throw new ArgumentOutOfRangeException("ZipCode must be at least 5 characters and no more then 10 characters");
                 }
             }
         }

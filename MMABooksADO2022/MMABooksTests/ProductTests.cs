@@ -34,12 +34,12 @@ namespace MMABooksTests
             Assert.AreEqual(0, def.OnHandQuantity);
 
             // These are used to check if the loaded constructor wes able
-            // to fill out the 
+            // to fill out the product object.
             Assert.IsNotNull(p);
-            Assert.AreNotEqual(null, p.ProductCode);
-            Assert.AreNotEqual(null, p.Description);
-            Assert.AreNotEqual(null, p.UnitPrice);
-            Assert.AreNotEqual(null, p.OnHandQuantity);
+            Assert.AreEqual("RTYU", p.ProductCode);
+            Assert.AreEqual("Roland's Guide To Coding Or Whatever", p.Description);
+            Assert.AreEqual(84.75m, p.UnitPrice);
+            Assert.AreEqual(5000, p.OnHandQuantity);
         }
 
         [Test]
