@@ -43,7 +43,7 @@ namespace MMABooksTests
             // assert that the property now returns the new values
             Assert.AreEqual(newCode, state1.StateCode);
             Assert.AreEqual(newName, state1.StateName);
-            // the previous part of the test isn't sufficient because the setters might ALWAYS set the properties to oregon
+            // the previous part of the test isn't sufficient because the setters might ALWAYS set the properties to Oregon
             // make sure that's not the case by providing a different set of values
             newCode = "CA";
             newName = "California";
