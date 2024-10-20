@@ -7,6 +7,8 @@ namespace MMABooksDBClasses
 {
     public static class MMABooksDB
     {
+        // This method then uses the string made to connect to the
+        // server so that information stored can be read and changed.
         public static MySqlConnection GetConnection()
         {
             string connectionString = GetMySqlConnectionString();
@@ -14,8 +16,8 @@ namespace MMABooksDBClasses
             return connection;
 
         }
-
-        public static string GetMySqlConnectionString()
+        // Gets the information and makes a string to the sql server.
+        private static string GetMySqlConnectionString()
         {
             string folder = System.AppContext.BaseDirectory;
             var builder = new ConfigurationBuilder()

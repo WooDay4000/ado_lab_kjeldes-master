@@ -11,8 +11,8 @@ namespace MMABooksDBClasses
 {
     public static class CustomerDB
     {
-        // A method used to grab from the database, using the customerID of a field
-        // to grab a specific customer record.
+        // A method that retrieves a specific customer record
+        // from the database using the CustomerID field.
         public static Customer GetCustomer(int customerID)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
@@ -45,6 +45,8 @@ namespace MMABooksDBClasses
                     return null;
                 }
             }
+            // This is used to give us any errors that the MySQL
+            // server my produce during a process.
             catch (MySqlException ex)
             {
                 throw ex;
@@ -55,8 +57,8 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method used to add a customer record to the database's Customers table, using a customer object
-        // to have the data added to the database.
+        // A method that adds a customer record to the Customers table in
+        // the database using a customer object.
         public static int AddCustomer(Customer customer)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
@@ -98,8 +100,8 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method used to delate a customer record from the database's Customers table, using the customer object
-        // to delate a specific customer record.
+        // A method that deletes a specific customer record from the
+        // Customers table in the database using a customer object.
         public static bool DeleteCustomer(Customer customer)
         {
             // get a connection to the database
@@ -143,9 +145,9 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method used to update a customer record from the database's Customers table, using the customer object
-        // mimicking the customer record you would like to update, and a customer object with the data that you want
-        // the customer record to be updated to.
+        // A method that updates a customer record in the Customers table in the
+        // database using the current customer object and a new customer object with
+        // the updated data.
         public static bool UpdateCustomer(Customer oldCustomer,
             Customer newCustomer)
         {

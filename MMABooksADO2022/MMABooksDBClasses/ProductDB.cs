@@ -1,5 +1,6 @@
 ﻿using MMABooksBusinessClasses;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,9 +10,9 @@ namespace MMABooksDBClasses
 {
     public static class ProductDB
     {
-        // A method used to grab from the database, using the product code of a field
-        // to grab a specific product record.
-        public static Product GetProduct(string productcode)
+        // A method that retrieves a specific product record
+        // from the database using the ProductCode field.
+        public static Product GetProduct(string productCode)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
             string selectStatement
@@ -19,20 +20,20 @@ namespace MMABooksDBClasses
                 + "FROM Products "
                 + "WHERE ProductCode = @ProductCode";
             MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection);
-            selectCommand.Parameters.AddWithValue("@ProductCode", productcode);
+            selectCommand.Parameters.AddWithValue("@ProductCode", productCode);
 
             try
             {
                 connection.Open();
-                MySqlDataReader custReader =
+                MySqlDataReader reader =
                     selectCommand.ExecuteReader(CommandBehavior.SingleRow);
-                if (custReader.Read())
+                if (reader.Read())
                 {
                     Product product = new Product();
-                    product.ProductCode = custReader["ProductCode"].ToString();
-                    product.Description = custReader["Description"].ToString();
-                    product.UnitPrice = (decimal)custReader["UnitPrice"];
-                    product.OnHandQuantity = (int)custReader["OnHandQuantity"];
+                    product.ProductCode = reader["ProductCode"].ToString();
+                    product.Description = reader["Description"].ToString();
+                    product.UnitPrice = (decimal)reader["UnitPrice"];
+                    product.OnHandQuantity = (int)reader["OnHandQuantity"];
                     return product;
                 }
                 else
@@ -40,6 +41,8 @@ namespace MMABooksDBClasses
                     return null;
                 }
             }
+            // This is used to give us any errors that the MySQL
+            // server my produce during a process.
             catch (MySqlException ex)
             {
                 throw ex;
@@ -50,8 +53,46 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method used to add a product record to the database's Products table, using a product object
-        // to have the data added to the database.
+        // A method that will be used to grab a list of all the current products
+        // stored in the Products table.
+        public static List<Product> GetList()
+        {
+            List<Product> products = new List<Product>();
+            MySqlConnection connection = MMABooksDB.GetConnection();
+            string selectStatement
+                = "SELECT ProductCode, Description, UnitPrice, OnHandQuantity "
+                + "FROM Products ";
+            MySqlCommand selectCommand = new MySqlCommand(selectStatement, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = selectCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Product p = new Product();
+                    p.ProductCode = reader["ProductCode"].ToString();
+                    p.Description = reader["Description"].ToString();
+                    p.UnitPrice = (decimal)reader["UnitPrice"];
+                    p.OnHandQuantity = (int)reader["OnHandQuantity"];
+                    products.Add(p);
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return products;
+        }
+
+        // A method that adds a product record to the Products table in
+        // the database using a product object.
         public static bool AddProduct(Product product)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
@@ -83,8 +124,8 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method used to delate a product record from the database's Products table, using the product object
-        // to delate a specific product record.
+        // A method that deletes a specific product record from the
+        // Customers table in the database using a customer object.
         public static bool DeleteProduct(Product product)
         {
             // get a connection to the database
@@ -124,9 +165,9 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method used to update a product record from the database's Products table, using the product object
-        // mimicking the product record you would like to update, and a product object with the data that you want
-        // the product record to be updated to.
+        // A method that updates a product record in the Products table in the
+        // database using the current product object and a new product object with
+        // the updated data.
         public static bool UpdateProduct(Product oldProduct,
             Product newProduct)
         {
@@ -157,7 +198,6 @@ namespace MMABooksDBClasses
             updateCommand.Parameters.AddWithValue("@OldDescription", oldProduct.Description);
             updateCommand.Parameters.AddWithValue("@OldUnitPrice", oldProduct.UnitPrice);
             updateCommand.Parameters.AddWithValue("@OldOnHandQuantity", oldProduct.OnHandQuantity);
-
 
             try
             {

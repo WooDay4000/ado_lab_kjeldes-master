@@ -10,19 +10,19 @@ namespace MMABooksBusinessClasses
         public Product() { }
 
         // Loaded Constructor
-        public Product(string productcode, string description, decimal unitprice, int onhandquantity)
+        public Product(string productCode, string description, decimal unitPrice, int onHandQuantity)
         {
-            ProductCode = productcode;
+            ProductCode = productCode;
             Description = description;
-            UnitPrice = unitprice;
-            OnHandQuantity = onhandquantity;
+            UnitPrice = unitPrice;
+            OnHandQuantity = onHandQuantity;
         }
 
         // instance variables
-        private string productcode;
+        private string productCode;
         private string description;
-        private decimal unitprice;
-        private int onhandquantity;
+        private decimal unitPrice;
+        private int onHandQuantity;
 
 
         // Getter and setter field of the ProductCode field for Product object
@@ -30,18 +30,18 @@ namespace MMABooksBusinessClasses
         {
             get
             {
-                return productcode;
+                return productCode;
             }
 
             set
             {
-                if (value.Trim().Length == 4)
+                if (value.Trim().Length > 0 && value.Trim().Length <= 10)
                 {
-                    productcode = value;
+                    productCode = value;
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Product code must be 4 characters of length");
+                    throw new ArgumentOutOfRangeException("Product code must be at least 1 character and no more then 10 characters.");
                 }
             }
         }
@@ -56,13 +56,13 @@ namespace MMABooksBusinessClasses
 
             set
             {
-                if (value.Trim().Length > 0 && value.Trim().Length <= 100)
+                if (value.Trim().Length > 0 && value.Trim().Length <= 50)
                 {
                     description = value;
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Must be at least 1 character and no more then 100 characters");
+                    throw new ArgumentOutOfRangeException("Must be at least 1 character and no more then 50 characters.");
                 }
             }
         }
@@ -72,18 +72,18 @@ namespace MMABooksBusinessClasses
         {
             get
             {
-                return unitprice;
+                return unitPrice;
             }
 
             set
             {
-                if (value > 0 && value <= 500)
+                if (value > 0 && value <= 99999999.9999m)
                 {
-                    unitprice = Math.Round(value, 2);
+                    unitPrice = value;
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Unit price must be greater then 0.00 and less then 500.00");
+                    throw new ArgumentOutOfRangeException("Unit price must be greater than 0.0000 and no more then 99999999.9999.");
                 }
             }
         }
@@ -93,20 +93,20 @@ namespace MMABooksBusinessClasses
         {
             get
             {
-                return onhandquantity;
+                return onHandQuantity;
             }
 
             set
             {
                 if (value > 0)
                 {
-                    onhandquantity = value;
+                    onHandQuantity = value;
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("On hand quantity amount must greater then 0");
+                    throw new ArgumentOutOfRangeException("OnHandQuantity must be a positive integer.");
                 }
-                
+
             }
         }
 

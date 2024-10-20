@@ -8,14 +8,14 @@ namespace MMABooksBusinessClasses
         // you can ignore them
         public Customer() { }
 
-        public Customer(int customerID, string name, string address, string city, string state, string zipcode)
+        public Customer(int customerID, string name, string address, string city, string state, string zipCode)
         {
             CustomerID = customerID;
             Name = name;
             Address = address;
             City = city;
             State = state;
-            ZipCode = zipcode;
+            ZipCode = zipCode;
         }
 
         // instance variables, always camelCase
@@ -24,7 +24,7 @@ namespace MMABooksBusinessClasses
         private string address;
         private string city;
         private string state;
-        private string zipcode;
+        private string zipCode;
 
         // Getter and setter field of the CustomerID field for Customer object
         public int CustomerID
@@ -42,7 +42,7 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Customer ID must be a positive integer");
+                    throw new ArgumentOutOfRangeException("Customer ID must be a positive integer.");
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Name must be at least 1 character and no more then 100 characters");
+                    throw new ArgumentOutOfRangeException("Name must be at least 1 character and no more than 100 characters.");
                 }
             }
         }
@@ -78,13 +78,13 @@ namespace MMABooksBusinessClasses
 
             set
             {
-                if (value.Trim().Length > 0 && value.Trim().Length <= 100)
+                if (value.Trim().Length > 0 && value.Trim().Length <= 50)
                 {
                     address = value;
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Address must be at least 1 character and no more then 100 characters");
+                    throw new ArgumentOutOfRangeException("Address must be at least 1 character and no more then 50 characters.");
                 }
             }
         }
@@ -99,13 +99,13 @@ namespace MMABooksBusinessClasses
 
             set
             {
-                if (value.Trim().Length > 0 && value.Trim().Length <= 100)
+                if (value.Trim().Length > 0 && value.Trim().Length <= 20)
                 {
                     city = value;
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("City must be at least 1 character and no more then 100 characters");
+                    throw new ArgumentOutOfRangeException("City must be at least 1 character and no more then 20 characters.");
                 }
             }
         }
@@ -114,19 +114,19 @@ namespace MMABooksBusinessClasses
         public string State
         {
             get
-            { 
+            {
                 return state;
             }
 
             set
             {
-                if (value.Trim().Length > 0 && value.Trim().Length <= 100)
+                if (value.Trim().Length == 2)
                 {
                     state = value;
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("State must be at least 1 character and no more then 100 characters");
+                    throw new ArgumentOutOfRangeException("State must be exactly 2 characters.");
                 }
             }
         }
@@ -136,18 +136,18 @@ namespace MMABooksBusinessClasses
         {
             get
             {
-                return zipcode;
+                return zipCode;
             }
 
             set
             {
-                if (value.Trim().Length >= 5 && value.Trim().Length <= 10)
+                if (value.Trim().Length >= 5 && value.Trim().Length <= 15)
                 {
-                    zipcode = value;
+                    zipCode = value;
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("ZipCode must be at least 5 characters and no more then 10 characters");
+                    throw new ArgumentOutOfRangeException("ZipCode must be at least 5 characters and no more then 15 characters.");
                 }
             }
         }

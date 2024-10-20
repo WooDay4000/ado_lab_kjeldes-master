@@ -58,7 +58,7 @@ namespace MMABooksTests
         {
             // The previous test wouldn't pass if the getters didn't work so I'll omit this one
             // notice that it passes
-        }  
+        }
 
         [Test]
         public void TestStateToString()

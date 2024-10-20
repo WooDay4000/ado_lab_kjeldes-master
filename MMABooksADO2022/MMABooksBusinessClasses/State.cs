@@ -23,7 +23,8 @@ namespace MMABooksBusinessClasses
         public string StateName { get; set; }
 
         private string stateCode;
-        public string StateCode { 
+        public string StateCode
+        {
             get
             {
                 return stateCode;
