@@ -56,16 +56,16 @@ namespace MMABooksTests
             customer.ZipCode = "71234";
 
             // Add the created customer to the database 
-            // and gets it gain a automatically created id
+            // and have it gain a automatically created id
             // set to the customerID field.
             int customerID = CustomerDB.AddCustomer(customer);
             // Using the customerID, we will update the customer object
             // to have the information from the database including the customer ID
             customer = CustomerDB.GetCustomer(customerID);
-            // Then will be run though the DeleteCustomer to delete the customer
+            // Then will be run this object though the DeleteCustomer to delete the customer
             // from the database. Return 1 for success, and -1 for failure.
             bool result = CustomerDB.DeleteCustomer(customer);
-            // Then using the result will show in the test if this successful or not.
+            // Then using the result will show in the test if this was successful or not.
             Assert.IsTrue(result);
         }
 
@@ -82,12 +82,12 @@ namespace MMABooksTests
             newCustomer.State = "FL";
             newCustomer.ZipCode = "71234";
 
-            // Using an id, we will make a the oldCustomer object
-            // to have the information that will be updated.
+            // Using an id, we will make the oldCustomer object
+            // have the information that will be updated.
             Customer oldCustomer = CustomerDB.GetCustomer(100);
-            // With the oldCustomer we will use the UpdateCustomer method
-            // with the newCustomer to have the entry in database updated
-            // to have the new information. Return 1 for success, and -1 for failure.
+            // With the oldCustomer object we will use the UpdateCustomer method
+            // with the newCustomer object to have the entry in database updated
+            // to have the new information. Returning 1 for success, and -1 for failure.
             bool result = CustomerDB.UpdateCustomer(oldCustomer, newCustomer);
             // Then using the result will show in the test if this successful or not.
             Assert.IsTrue(result);

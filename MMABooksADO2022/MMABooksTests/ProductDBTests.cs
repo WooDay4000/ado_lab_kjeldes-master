@@ -22,7 +22,7 @@ namespace MMABooksTests
 
         [Test]
         // The method that is used to test the GetList
-        // method in ProductDB so see if it's able to get
+        // method in ProductDB to see if it's able to get
         // a list of all the possible product records.
         public void TestGetList()
         {
@@ -48,7 +48,6 @@ namespace MMABooksTests
                 Assert.AreNotEqual(null, products[i].UnitPrice);
                 Assert.AreNotEqual(null, products[i].OnHandQuantity);
             }
-
         }
 
         [Test]
@@ -66,7 +65,7 @@ namespace MMABooksTests
             // Added this because it would produce a error after
             // a second test because the product record was already created,
             // so to fix these we will get the potentially already
-            // created product, and if was already created and has
+            // created product, and if it was already created and has
             // information in it, it will be deleted.
             Product recentlyMade = ProductDB.GetProduct("QWER");
             if (recentlyMade != null)
@@ -94,7 +93,7 @@ namespace MMABooksTests
 
             // Add the created product to the database
             ProductDB.AddProduct(p2);
-            // Then we remove the product to the database, with it returning
+            // Then we remove the product from the database, with it returning
             // a 1 if it was able to be deleted, and -1 if it wasn't able to
             // to be delated.
             bool result = ProductDB.DeleteProduct(p2);
