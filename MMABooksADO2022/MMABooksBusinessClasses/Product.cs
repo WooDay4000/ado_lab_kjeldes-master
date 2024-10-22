@@ -25,7 +25,8 @@ namespace MMABooksBusinessClasses
         private int onHandQuantity;
 
 
-        // Getter and setter field of the ProductCode field for Product object
+        // Getter and setter field of the ProductCode field
+        // of the Product object
         public string ProductCode
         {
             get
@@ -41,12 +42,13 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Product code must be at least 1 character and no more then 10 characters.");
+                    throw new ArgumentOutOfRangeException("Product code must be at least 1 character and no more than 10 characters.");
                 }
             }
         }
 
-        // Getter and setter field of the Description field for Product object
+        // Getter and setter field of the Description field
+        // of the Product object
         public string Description
         {
             get
@@ -62,12 +64,13 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Must be at least 1 character and no more then 50 characters.");
+                    throw new ArgumentOutOfRangeException("Must be at least 1 character and no more than 50 characters.");
                 }
             }
         }
 
-        // Getter and setter field of the UnitPrice field for Product object
+        // Getter and setter field of the UnitPrice field
+        // of the Product object
         public decimal UnitPrice
         {
             get
@@ -83,12 +86,13 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Unit price must be greater than 0.0000 and no more then 99999999.9999.");
+                    throw new ArgumentOutOfRangeException("Unit price must be greater than 0.0000 and no more than 99999999.9999.");
                 }
             }
         }
 
-        // Getter and setter field of the OnHandQuantity field for Product object
+        // Getter and setter field of the OnHandQuantity field
+        // of the Product object
         public int OnHandQuantity
         {
             get
@@ -98,7 +102,7 @@ namespace MMABooksBusinessClasses
 
             set
             {
-                if (value > 0)
+                if (value >= 0)
                 {
                     onHandQuantity = value;
                 }
@@ -110,8 +114,8 @@ namespace MMABooksBusinessClasses
             }
         }
 
-        // A ToString override that allows for the object no matter the datatype to be outputted as a string
-        // for testing and to be displayed.
+        // A ToString override that allows for the object to be outputted
+        // as a string for testing and displaying.
         public override string ToString() => ProductCode + ", " + Description + ", " + UnitPrice + ", " + OnHandQuantity;
     }
 }

@@ -26,7 +26,8 @@ namespace MMABooksBusinessClasses
         private string state;
         private string zipCode;
 
-        // Getter and setter field of the CustomerID field for Customer object
+        // Getter and setter field of the CustomerID field
+        // of the Customer object
         public int CustomerID
         {
             get
@@ -47,7 +48,8 @@ namespace MMABooksBusinessClasses
             }
         }
 
-        // Getter and setter field of the Name field for Customer object
+        // Getter and setter field of the Name field
+        // of the Customer object
         public string Name
         {
             get
@@ -68,7 +70,8 @@ namespace MMABooksBusinessClasses
             }
         }
 
-        // Getter and setter field of the Address field for Customer object
+        // Getter and setter field of the Address field
+        // of the Customer object
         public string Address
         {
             get
@@ -84,12 +87,13 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Address must be at least 1 character and no more then 50 characters.");
+                    throw new ArgumentOutOfRangeException("Address must be at least 1 character and no more than 50 characters.");
                 }
             }
         }
 
-        // Getter and setter field of the City field for Customer object
+        // Getter and setter field of the City field
+        // of the Customer object
         public string City
         {
             get
@@ -105,12 +109,13 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("City must be at least 1 character and no more then 20 characters.");
+                    throw new ArgumentOutOfRangeException("City must be at least 1 character and no more than 20 characters.");
                 }
             }
         }
 
-        // Getter and setter field of the State field for Customer object
+        // Getter and setter field of the State field
+        // of the Customer object
         public string State
         {
             get
@@ -131,7 +136,8 @@ namespace MMABooksBusinessClasses
             }
         }
 
-        // Getter and setter field of the ZipCode field for Customer object
+        // Getter and setter field of the ZipCode field
+        // of the Customer object
         public string ZipCode
         {
             get
@@ -147,13 +153,13 @@ namespace MMABooksBusinessClasses
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("ZipCode must be at least 5 characters and no more then 15 characters.");
+                    throw new ArgumentOutOfRangeException("ZipCode must be at least 5 characters and no more than 15 characters.");
                 }
             }
         }
 
-        // A ToString override that allows for the object no matter the datatype to be outputted as a string
-        // for testing and to be displayed.
+        // A ToString override that allows for the object to be outputted
+        // as a string for testing and displaying.
         public override string ToString() => CustomerID + ", " + Name + ", " + Address + ", " + City + ", " + State + ", " + ZipCode;
     }
 }

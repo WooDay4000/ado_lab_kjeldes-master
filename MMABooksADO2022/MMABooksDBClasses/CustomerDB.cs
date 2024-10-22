@@ -12,7 +12,9 @@ namespace MMABooksDBClasses
     public static class CustomerDB
     {
         // A method that retrieves a specific customer record
-        // from the database using the CustomerID field.
+        // from the Customers database table using
+        // the CustomerID field. Returns a Customer object if found,
+        // otherwise returns null.
         public static Customer GetCustomer(int customerID)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
@@ -45,8 +47,7 @@ namespace MMABooksDBClasses
                     return null;
                 }
             }
-            // This is used to give us any errors that the MySQL
-            // server my produce during a process.
+            // Catches any MySQL-specific errors during database operations.
             catch (MySqlException ex)
             {
                 throw ex;
@@ -57,8 +58,9 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method that adds a customer record to the Customers table in
-        // the database using a customer object.
+        // A method that used to add a new customer record to the Customers
+        // database table using a Customer object.
+        // Returns the generated CustomerID of the new customer.
         public static int AddCustomer(Customer customer)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
@@ -100,13 +102,17 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method that deletes a specific customer record from the
-        // Customers table in the database using a customer object.
+        // A method that is used to delete a specific customer record in the
+        // Customers database table using a Customer object. Where all fields
+        // must match the customer data for the record to be deleted,
+        // where then it returns true if a record was deleted, otherwise false.
         public static bool DeleteCustomer(Customer customer)
         {
             // get a connection to the database
             MySqlConnection connection = MMABooksDB.GetConnection();
-
+            // The MySql statement that the server will use to perform
+            // a specified command. Which for this is to delete
+            // a customer record.
             string deleteStatement =
                 "DELETE FROM Customers " +
                 "WHERE CustomerID = @CustomerID " +
@@ -115,8 +121,12 @@ namespace MMABooksDBClasses
                 "AND City = @City " +
                 "AND State = @State " +
                 "AND ZipCode = @ZipCode";
-            // set up the command object
+            // Set up the command object
+            // With this taking the statement we created and
+            // the connection we established with the MySql server.
             MySqlCommand deleteCommand = new MySqlCommand(deleteStatement, connection);
+            // With the following code after this, it uses the Customer object
+            // fields to replace the specified (@)Parameters in the deleteStatement.
             deleteCommand.Parameters.AddWithValue("@CustomerID", customer.CustomerID);
             deleteCommand.Parameters.AddWithValue("@Name", customer.Name);
             deleteCommand.Parameters.AddWithValue("@Address", customer.Address);
@@ -126,13 +136,18 @@ namespace MMABooksDBClasses
 
             try
             {
-                // open the connection
+                // Opens the connection
                 connection.Open();
-                // execute the command
+                // Executes the command
+                // Which with the deleteStatement that has the right parameters and
+                // the connection to the MySgl server it should be able to delete the
+                // specified customer.
                 int count = deleteCommand.ExecuteNonQuery();
-                // if the number of records returned = 1, return true otherwise return false
+                // If the count is set to 1 it's successful, otherwise return false
+                // which means it was unsuccessful .
                 return count == 1;
             }
+            // Catches any MySQL-specific errors during database operations.
             catch (MySqlException ex)
             {
                 // throw the exception
@@ -145,9 +160,11 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method that updates a customer record in the Customers table in the
-        // database using the current customer object and a new customer object with
-        // the updated data.
+        // A method that updates a customer record in the Customers database table
+        // using the current customer record values in the oldCustomer object to
+        // specify which record is being updated and a newCustomer object with
+        // the data that we want to update too.
+        // Returns true if the record was updated, otherwise false.
         public static bool UpdateCustomer(Customer oldCustomer,
             Customer newCustomer)
         {

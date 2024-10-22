@@ -14,8 +14,8 @@ namespace MMABooksTests
 
         [Test]
         // The method that is used to test the GetCustomer
-        // method in CustomerDB if it's able to get a
-        // customer record from the sql server
+        // method in CustomerDB is able to get a
+        // specific customer record from the sql server
         public void TestGetCustomer()
         {
             Customer c = CustomerDB.GetCustomer(1);
@@ -36,7 +36,7 @@ namespace MMABooksTests
             c.ZipCode = "10101";
 
             int customerID = CustomerDB.AddCustomer(c);
-            // Then we get back the customer record back with
+            // Then we get back the customer record with
             // the customerID attached
             c = CustomerDB.GetCustomer(customerID);
             Assert.AreEqual("Mickey Mouse", c.Name);
@@ -45,7 +45,7 @@ namespace MMABooksTests
         [Test]
         // The method that is used to test the DeleteCustomer
         // method in CustomerDB is able to delete a
-        // customer record in the sql server.
+        // specific customer record in the sql server.
         public void TestDeleteCustomer()
         {
             Customer customer = new Customer();
@@ -60,10 +60,10 @@ namespace MMABooksTests
             // set to the customerID field.
             int customerID = CustomerDB.AddCustomer(customer);
             // Using the customerID, we will update the customer object
-            // to have the information from the database including the customer ID
+            // to have the information from the database including the customer ID.
             customer = CustomerDB.GetCustomer(customerID);
             // Then will be run this object though the DeleteCustomer to delete the customer
-            // from the database. Return 1 for success, and -1 for failure.
+            // from the database. Return true for success, and false for failure.
             bool result = CustomerDB.DeleteCustomer(customer);
             // Then using the result will show in the test if this was successful or not.
             Assert.IsTrue(result);
@@ -72,7 +72,7 @@ namespace MMABooksTests
         [Test]
         // The method that is used to test the UpdateCustomer
         // method in CustomerDB is able to update a
-        // customer record in the sql server.
+        // specific customer record in the sql server.
         public void TestUpdateCustomer()
         {
             Customer newCustomer = new Customer();
@@ -87,7 +87,7 @@ namespace MMABooksTests
             Customer oldCustomer = CustomerDB.GetCustomer(100);
             // With the oldCustomer object we will use the UpdateCustomer method
             // with the newCustomer object to have the entry in database updated
-            // to have the new information. Returning 1 for success, and -1 for failure.
+            // to have the new information. Returning true for success, and false for failure.
             bool result = CustomerDB.UpdateCustomer(oldCustomer, newCustomer);
             // Then using the result will show in the test if this successful or not.
             Assert.IsTrue(result);

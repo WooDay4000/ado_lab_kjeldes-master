@@ -11,7 +11,9 @@ namespace MMABooksDBClasses
     public static class ProductDB
     {
         // A method that retrieves a specific product record
-        // from the database using the ProductCode field.
+        // from the Products database table using
+        // the ProductCode field. Returns a Product object if found,
+        // otherwise returns null.
         public static Product GetProduct(string productCode)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
@@ -41,8 +43,7 @@ namespace MMABooksDBClasses
                     return null;
                 }
             }
-            // This is used to give us any errors that the MySQL
-            // server my produce during a process.
+            // Catches any MySQL-specific errors during database operations.
             catch (MySqlException ex)
             {
                 throw ex;
@@ -53,8 +54,10 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method that will be used to grab a list of all the current products
-        // stored in the Products table.
+        // A method that will be used to make a Product object list of all
+        // the current products stored in the Products database table.
+        // Returns a lists of all the current product records
+        // stored in the MySql server database.
         public static List<Product> GetList()
         {
             List<Product> products = new List<Product>();
@@ -68,7 +71,6 @@ namespace MMABooksDBClasses
             {
                 connection.Open();
                 MySqlDataReader reader = selectCommand.ExecuteReader();
-
                 while (reader.Read())
                 {
                     Product p = new Product();
@@ -91,8 +93,9 @@ namespace MMABooksDBClasses
             return products;
         }
 
-        // A method that adds a product record to the Products table in
-        // the database using a product object.
+        // A method that used to add a new product record to the Products
+        // database table using a Product object.
+        // Returns true if the record was added successfully, false if unsuccessful.
         public static bool AddProduct(Product product)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
@@ -124,8 +127,10 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method that deletes a specific product record from the
-        // Customers table in the database using a customer object.
+        // A method that is used to delete a specific product record in the
+        // Products database table using a Product object. Where all fields
+        // must match the product data for the record to be deleted,
+        // where then it returns true if a record was deleted, otherwise false.
         public static bool DeleteProduct(Product product)
         {
             // get a connection to the database
@@ -165,18 +170,17 @@ namespace MMABooksDBClasses
             }
         }
 
-        // A method that updates a product record in the Products table in the
-        // database using the current product object and a new product object with
-        // the updated data.
+        // A method that updates a product record in the Products database table
+        // using the current product record values in the oldProduct object to
+        // specify which record is being updated and a newProduct object with
+        // the data that we want to update too.
+        // Returns true if the record was updated, otherwise false.
         public static bool UpdateProduct(Product oldProduct,
             Product newProduct)
         {
             // create a connection
             MySqlConnection connection = MMABooksDB.GetConnection();
-            // Had to remove product code because it was apart of a foreign key,
-            // so it's impossible unless a lot of stuff is changed, which not sure
-            // id that is allowed so here is this. 
-            // for
+
             string updateStatement =
                 "UPDATE Products SET " +
                 "Description = @NewDescription, " +
@@ -188,12 +192,12 @@ namespace MMABooksDBClasses
                 "AND OnHandQuantity = @OldOnHandQuantity";
             // setup the command object
             MySqlCommand updateCommand = new MySqlCommand(updateStatement, connection);
-            // The new customer values for the update.
+            // The new product values for the update.
             updateCommand.Parameters.AddWithValue("@NewDescription", newProduct.Description);
             updateCommand.Parameters.AddWithValue("@NewUnitPrice", newProduct.UnitPrice);
             updateCommand.Parameters.AddWithValue("@NewOnHandQuantity", newProduct.OnHandQuantity);
 
-            // The old customer values that will be replaced in this update.
+            // The old product values that will be replaced in this update.
             updateCommand.Parameters.AddWithValue("@OldProductCode", oldProduct.ProductCode);
             updateCommand.Parameters.AddWithValue("@OldDescription", oldProduct.Description);
             updateCommand.Parameters.AddWithValue("@OldUnitPrice", oldProduct.UnitPrice);
